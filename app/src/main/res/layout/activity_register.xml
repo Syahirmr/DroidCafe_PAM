@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream_bg"
+    tools:context=".RegisterActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp">
+
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/logoRegister"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo"
+                android:contentDescription="@string/app_name"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/titleRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create your account ☕"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/coffee_dark"
+                android:fontFamily="@font/poppins"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Full Name -->
+            <EditText
+                android:id="@+id/etRegFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                android:background="@drawable/edittext_bg"
+                android:padding="12dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/coffee_dark"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Username -->
+            <EditText
+                android:id="@+id/etRegUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:background="@drawable/edittext_bg"
+                android:padding="12dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/coffee_dark"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Password (dengan icon mata) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/edittext_bg"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="12dp"
+                android:layout_marginBottom="24dp">
+
+                <EditText
+                    android:id="@+id/etRegPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/coffee_dark"
+                    android:paddingVertical="12dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/ivToggleRegPassword"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_eye_off"
+                    android:contentDescription="Toggle password visibility"
+                    android:padding="4dp" />
+            </LinearLayout>
+
+            <!-- Tombol Register -->
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/rounded_button_dark"
+                android:fontFamily="@font/poppins"
+                android:paddingVertical="12dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Text Login -->
+            <TextView
+                android:id="@+id/tvLoginNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account? Login"
+                android:textColor="@color/caramel_gold"
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

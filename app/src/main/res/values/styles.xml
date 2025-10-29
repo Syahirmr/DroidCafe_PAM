@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CafeButton">
+        <item name="android:backgroundTint">@color/coffee_dark</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="CafeCard">
+        <item name="android:background">@color/cream_bg</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:radius">12dp</item>
+    </style>
+</resources>

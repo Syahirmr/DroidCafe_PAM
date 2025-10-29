@@ -3,26 +3,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/nav_home">
+
+    <!-- 🏠 Home Fragment -->
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="lat.pam.droidcafe.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_menu"
+            app:destination="@id/nav_menu" />
+    </fragment>
+
+    <!-- ☕ Menu Fragment -->
+    <fragment
+        android:id="@+id/nav_menu"
+        android:name="lat.pam.droidcafe.MenuFragment"
+        android:label="Menu"
+        tools:layout="@layout/fragment_menu">
+        <argument
+            android:name="selectedCategory"
+            app:argType="string"
+            android:defaultValue="Coffee" />
+    </fragment>
+
+    <!-- 👤 Profile Fragment -->
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="lat.pam.droidcafe.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="lat.pam.droidcafe.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/nav_cart"
+        android:name="lat.pam.droidcafe.CartFragment"
+        android:label="Keranjang"
+        tools:layout="@layout/fragment_cart">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_cart_to_order"
+            app:destination="@id/nav_order" />
     </fragment>
+
+    <!-- 🛒 Order Fragment -->
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="lat.pam.droidcafe.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/nav_order"
+        android:name="lat.pam.droidcafe.OrderFragment"
+        android:label="Order"
+        tools:layout="@layout/fragment_order" />
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+    <fragment
+        android:id="@+id/nav_confirmation"
+        android:name="lat.pam.droidcafe.ConfirmationFragment"
+        android:label="Konfirmasi Pesanan"
+        tools:layout="@layout/fragment_confirmation" />
+
+
 </navigation>

@@ -1,59 +1,111 @@
 package lat.pam.droidcafe
 
 import android.os.Bundle
-import android.content.Intent
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import lat.pam.droidcafe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+
+    private var backPressedTime: Long = 0
+    private var backToast: Toast? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        // ✅ Ambil NavHostFragment & NavController utama
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        val bottomNav: BottomNavigationView = binding.bottomNavigationView
+        bottomNav.setupWithNavController(navController)
 
-        binding.fab.setOnClickListener { view ->
-            val intent = Intent(this, OrderActivity::class.java)
-            startActivity(intent)
+        // ✅ Listener custom supaya sinkronisasi tetap rapi
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    if (navController.currentDestination?.id != R.id.nav_home) {
+                        navController.popBackStack(R.id.nav_home, false)
+                        navController.navigate(R.id.nav_home)
+                    }
+                    hideFab()
+                    true
+                }
+
+                R.id.nav_menu -> {
+                    if (navController.currentDestination?.id != R.id.nav_menu) {
+                        navController.popBackStack(R.id.nav_menu, false)
+                        navController.navigate(R.id.nav_menu)
+                    }
+                    showFab()
+                    true
+                }
+
+                R.id.nav_profile -> {
+                    if (navController.currentDestination?.id != R.id.nav_profile) {
+                        navController.popBackStack(R.id.nav_profile, false)
+                        navController.navigate(R.id.nav_profile)
+                    }
+                    hideFab()
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        // ✅ Tampilkan/hilangkan FAB tergantung fragment aktif
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.nav_menu -> showFab()
+                else -> hideFab()
+            }
+        }
+
+        // ✅ Klik FAB → buka CartFragment
+        binding.fabOrder.setOnClickListener {
+            if (navController.currentDestination?.id != R.id.nav_cart) {
+                navController.navigate(R.id.nav_cart)
+            }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    // 💡 Bisa diakses dari fragment lain
+    fun showFab() {
+        binding.fabOrder.show()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+    fun hideFab() {
+        binding.fabOrder.hide()
+    }
+
+    // ✅ DOUBLE BACK EXIT LOGIC
+    override fun onBackPressed() {
+        // Kalau bukan di HomeFragment, balikin navigasi dulu
+        if (navController.currentDestination?.id != R.id.nav_home) {
+            super.onBackPressedDispatcher.onBackPressed()
+            return
         }
-    }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        // Kalau udah di HomeFragment → cek double back
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast?.cancel()
+            finishAffinity() // langsung tutup app
+        } else {
+            backToast = Toast.makeText(this, "Tekan sekali lagi untuk keluar", Toast.LENGTH_SHORT)
+            backToast?.show()
+        }
+
+        backPressedTime = System.currentTimeMillis()
     }
 }

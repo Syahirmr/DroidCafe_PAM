@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cream_bg"
+    android:padding="16dp"
+    tools:context=".OrderFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Judul -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🛒 Form Pemesanan"
+            android:textColor="@color/coffee_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Nama -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama"
+            android:textColor="@color/coffee_dark"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan nama Anda"
+            android:backgroundTint="@color/coffee_light"
+            android:inputType="textPersonName" />
+
+        <!-- Alamat -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat"
+            android:textColor="@color/coffee_dark"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan alamat lengkap"
+            android:backgroundTint="@color/coffee_light"
+            android:inputType="textPostalAddress" />
+
+        <!-- Kota -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kota"
+            android:textColor="@color/coffee_dark"
+            android:layout_marginTop="12dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown" />
+
+        <!-- Nomor Telepon -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nomor Telepon"
+            android:textColor="@color/coffee_dark"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan nomor telepon"
+            android:backgroundTint="@color/coffee_light"
+            android:inputType="phone" />
+
+        <!-- Catatan -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Catatan Pesanan"
+            android:textColor="@color/coffee_dark"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tambahkan catatan untuk pesanan Anda"
+            android:backgroundTint="@color/coffee_light"
+            android:inputType="textMultiLine" />
+
+        <!-- Metode Pengiriman -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Metode Pengiriman"
+            android:textColor="@color/coffee_dark"
+            android:layout_marginTop="16dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbSameDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Same Day Messenger Service" />
+
+            <RadioButton
+                android:id="@+id/rbNextDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Next Day Ground Delivery" />
+
+            <RadioButton
+                android:id="@+id/rbPickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pick Up" />
+        </RadioGroup>
+
+        <!-- Tombol Submit -->
+        <Button
+            android:id="@+id/btnSubmitOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kirim Pesanan"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/coffee_dark" />
+
+    </LinearLayout>
+</ScrollView>
